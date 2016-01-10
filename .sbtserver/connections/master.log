@@ -1,0 +1,13 @@
+New log file opened at Thu Dec 31 10:06:37 CET 2015 by 11621@Air-de-Jacques
+Taking next connection to: 57328
+New client attempting to connect on port: 57329-57328
+  Address = /192.168.1.50:57328
+This client on port 57329 has uuid 58343539-3412-46f1-b59a-7a4c970e7d36 configName play-fork-run humanReadableName Play Fork Run protocolVersion 1 featureTags Vector()
+Connected Clients: play-fork-run-58343539-3412-46f1-b59a-7a4c970e7d36
+Taking next connection to: 57328
+Checking to see if clients are empty...
+No non-daemon clients connected after 3 min. Shutting down.
+Server socket thread exiting.
+0 clients open, will close them...
+All client sockets have been closed.
+Closing the 11621@Air-de-Jacques logs at Thu Dec 31 10:09:37 CET 2015, goodbye.

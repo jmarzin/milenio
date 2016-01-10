@@ -1,0 +1,64 @@
+@(carousel: Seq[(String,Object)], description: Html, realisations_liees: Seq[String])
+
+<!-- Page Content -->
+<div class="container">
+    <!-- Page Heading/Breadcrumbs -->
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Une réalisation
+                <small></small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="@routes.Application.index">Accueil</a>
+                </li>
+                <li class="active">Réalisation</li>
+            </ol>
+        </div>
+    </div>
+    <!-- /.row -->
+    <!-- Portfolio Item Row -->
+    <div class="row">
+         <div class="col-md-8">
+             <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                 @if(carousel.size > 0) {
+                      @carousel_part2(carousel)
+                 }
+             </div>
+        </div>
+
+        <div class="col-md-4">
+            @description
+        </div>
+
+    </div>
+    <!-- /.row -->
+
+        <!-- Related Projects Row -->
+    @if(realisations_liees.size > 0) {
+        <div class="row">
+
+            <div class="col-lg-12">
+                <h3 class="page-header">Projets voisins</h3>
+            </div>
+
+            @for(i <- realisations_liees.indices) {
+                <div class="col-sm-3 col-xs-6">
+                    <a href="@routes.Application.realisation(realisations_liees(i).split("/").takeRight(2)(0))">
+                        <img class="img-responsive img-hover img-related"
+                        src="@routes.Assets.at(realisations_liees(i))"
+                        alt=""
+                        height="500" width="300">
+                    </a>
+                </div>
+            }
+
+        </div>
+    }
+        <!-- /.row -->
+
+    <hr>
+
+    @footer()
+
+</div>
+

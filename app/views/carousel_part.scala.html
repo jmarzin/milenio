@@ -1,0 +1,43 @@
+@(carousel: Seq[(String,Object)])
+
+    <!-- Indicators -->
+<ol class="carousel-indicators">
+@for(i <- carousel.indices) {
+    <li data-target="#myCarousel" data-slide-to=@i.toString
+        @if(i == 0) {
+            class="active"
+        }></li>
+}
+</ol>
+     <!-- Wrapper for slides -->
+<div class="carousel-inner">
+    @for(i <- carousel.indices) {
+        <div
+           @if(i == 0) {
+               class="item active"
+               } else {
+              class="item"
+              }
+            >
+            @*<div class="fill" style="background-image:url(@routes.Assets.at(carousel(i)._1)) ;"></div>*@
+            <div class="fill" style="background-image:url(@routes.Assets.at(carousel(i)._1)) ;"></div>
+            <div class="carousel-caption">
+            @carousel(i)._2
+        </div>
+    </div>
+    }
+</div>
+
+        <!-- Controls -->
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+        <span class="icon-prev"></span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+        <span class="icon-next"></span>
+    </a>
+        <!-- Script to Activate the Carousel -->
+    <script>
+            $('.carousel').carousel({
+                interval: 3000 //changes the speed
+            })
+    </script>

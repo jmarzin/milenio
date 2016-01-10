@@ -1,0 +1,9 @@
+@(coord: Tuple3[String, String, String], creneaux: Array[(String,String)], focus_message: Boolean)(implicit req: RequestHeader)
+
+@main(Some("contact")) {
+
+   @contact_body(coord, creneaux, focus_message)
+
+}
+
+
