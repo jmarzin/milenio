@@ -1,4 +1,4 @@
-@(carousel: Seq[(String,Object)])
+@(carousel: Seq[(String, Html, String)])
 
 <!-- Indicators -->
 <ol class="carousel-indicators">
@@ -20,7 +20,18 @@
                 class="item"
                 }
         >
-            <img class="img-responsive" src="@routes.Assets.at(carousel(i)._1)">
+            @if(carousel(i)._3 != "") {
+                <p><iframe  title="pannellum panorama viewer"  allowfullscreen
+                    style="border-style:none"
+                    src="@routes.Assets.at(s"contenu/pannellum.htm?panorama=/${carousel(i)._3}&title=Panorama&author=Milenioconcept&preview=/${carousel(i)._1}")"
+                    height="500"
+                    width="750"></iframe>
+                    <br>
+                </p>
+            } else {
+                    <img class="img-responsive" src="@routes.Assets.at(carousel(i)._1)" height="500" width="750">
+            }
+
         </div>
     }
 </div>

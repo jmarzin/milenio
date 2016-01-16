@@ -1,4 +1,4 @@
-@(carousel: Seq[(String,Object)], panneaux: Seq[(Object, String)], realisations: Seq[String])
+@(carousel: Seq[(String, Html, String)], panneaux: Seq[(Object, String)], realisations: Seq[String])
 
 <!-- Header Carousel -->
 @if(carousel.size > 0) {
@@ -33,21 +33,23 @@
         <!-- /.row -->
 
         <!-- Portfolio Section -->
-    <div class="row">
-        <div class="col-lg-12">
-            <h2 class="page-header">Exemples de réalisations</h2>
+    @if(realisations.nonEmpty) {
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="page-header">Exemples de réalisations</h2>
+           </div>
+           @for(i <- realisations.indices) {
+               <div class="col-md-4 col-sm-6">
+                   <a href="@routes.Application.realisation(realisations(i).split("/").takeRight(2)(0))">
+                        <img class="img-responsive img-portfolio img-hover"
+                        src="@routes.Assets.at(realisations(i))"
+                        alt=""
+                        height="450" width="700">
+                    </a>
+                </div>
+            }
         </div>
-        @for(i <- realisations.indices) {
-            <div class="col-md-4 col-sm-6">
-                <a href="@routes.Application.realisation(realisations(i).split("/").takeRight(2)(0))">
-                    <img class="img-responsive img-portfolio img-hover"
-                    src="@routes.Assets.at(realisations(i))"
-                    alt=""
-                    height="450" width="700">
-                </a>
-            </div>
-        }
-    </div>
+    }
         <!-- /.row -->
 
     <hr>

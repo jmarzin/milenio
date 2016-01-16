@@ -1,10 +1,8 @@
-@import java.io.File
-@(chemin_contenu: String, chemin_appli: String)(implicit req: RequestHeader)
+@(a_propos: Html)(implicit req: RequestHeader)
 
 @main(Some("about")) {
 
-   <h2> Chemin contenu: @chemin_contenu Chemin appli: @chemin_appli</h2>
-   @about_body()
+   @about_body(a_propos)
 
 }
 

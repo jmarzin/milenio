@@ -1,4 +1,4 @@
-@(carousel: Seq[(String,Object)])
+@(carousel: Seq[(String, Html, String)])
 
     <!-- Indicators -->
 <ol class="carousel-indicators">
@@ -19,7 +19,6 @@
               class="item"
               }
             >
-            @*<div class="fill" style="background-image:url(@routes.Assets.at(carousel(i)._1)) ;"></div>*@
             <div class="fill" style="background-image:url(@routes.Assets.at(carousel(i)._1)) ;"></div>
             <div class="carousel-caption">
             @carousel(i)._2

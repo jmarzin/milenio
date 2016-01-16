@@ -7,7 +7,7 @@ GET     /                           controllers.Application.index
 GET     /about                      controllers.Application.about
 GET     /services                   controllers.Application.services
 GET     /contact/:focus_message     controllers.Contact.edit(focus_message: Boolean )
-GET     /portefeuille               controllers.Application.portefeuille
+GET     /portefeuille/:num_page     controllers.Application.portefeuille(num_page: Int)
 GET     /realisation/:real          controllers.Application.realisation(real)
 POST    /contact/message            controllers.Contact.message
 
