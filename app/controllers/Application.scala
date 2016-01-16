@@ -82,7 +82,7 @@ object Application extends Controller {
   }
 
   def about = Action { implicit request =>
-    val fic_a_propos = new File("contenu/a_propos/a_propos.html")
+    val fic_a_propos = new File(s"$chemin_appli/contenu/a_propos/a_propos.html")
     val a_propos = if (fic_a_propos.exists) Html(Source.fromFile(fic_a_propos).mkString) else Html("")
     Ok(views.html.about(a_propos))
   }
