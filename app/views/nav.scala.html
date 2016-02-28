@@ -23,12 +23,23 @@
                     >
                     <a href="@routes.Application.about">Actualités</a>
                 </li>
-                <li
+                <li class="dropdown"
                     @if(option_menu contains "services") {
                         class="active"
                     }
                     >
-                    <a href="@routes.Application.services">Services</a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Services <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="@routes.Application.portefeuille("services/cuisines", 1)">Cuisines</a>
+                        </li>
+                        <li>
+                            <a href="@routes.Application.portefeuille("services/salles_de_bain", 1)">Salles de bain</a>
+                        </li>
+                        <li>
+                            <a href="@routes.Application.portefeuille("services/rangements",1)">Rangements</a>
+                        </li>
+                    </ul>
                 </li>
                 <li
                     @if(option_menu contains "contact") {
@@ -42,7 +53,7 @@
                         class="active"
                         }
                 >
-                    <a href="@routes.Application.portefeuille(1)">Réalisations</a>
+                    <a href="@routes.Application.portefeuille("realisations",1)">Réalisations</a>
                 </li>
             </ul>
         </div>

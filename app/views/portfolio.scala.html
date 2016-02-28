@@ -1,0 +1,86 @@
+@(titre: String, type_port: String, num_page: Int, max_page: Int, items: Seq[(String,String,String)])(implicit req: RequestHeader)
+
+@main(Some("realisations")) {
+
+   <div class="container">
+
+         <!-- Page Heading/Breadcrumbs -->
+      <div class="row">
+         <div class="col-lg-12">
+            <h1 class="page-header">@titre
+            </h1>
+            <ol class="breadcrumb">
+               <li><a href="@routes.Application.index">Accueil</a>
+               </li>
+               <li class="active">@titre</li>
+            </ol>
+         </div>
+      </div>
+         <!-- /.row -->
+
+      @for(i <- items.indices) {
+         @if((i % 3)==0){
+            <div class="row">
+            }
+         <div class="col-md-4 img-portfolio">
+            <a href="@routes.Application.item_portefeuille(type_port,items(i)._1.split("/").takeRight(2)(0))">
+               <img class="img-responsive img-hover"
+               src="@routes.Assets.at(items(i)._1)"
+               alt=""
+               height="700" width="400"
+               >
+            </a>
+            <h3>
+               <a href="@routes.Application.item_portefeuille(type_port,items(i)._1.split("/").takeRight(2)(0))">@items(i)._2</a>
+            </h3>
+            <p>@items(i)._3</p>
+         </div>
+         @if((i % 3)==2){
+         </div>
+         }
+      }
+
+
+      <hr>
+
+      @if(max_page > 1) {
+            <!-- Pagination -->
+         <div class="row text-center">
+            <div class="col-lg-12">
+               <ul class="pagination">
+                  @if(max_page > 6) {
+                     <li>
+                        <a href="#">&laquo;</a>
+                     </li>
+                  }
+                  @for( i <- 1 to max_page) {
+                     @if(i == num_page) {
+                        <li class="active">
+                           <a href="#">@i</a>
+                        </li>
+                     } else {
+                        <li>
+                           <a href="@routes.Application.portefeuille(type_port,i)">@i</a>
+                        </li>
+                     }
+                  }
+                  @if(max_page > 6) {
+                     <li>
+                        <a href="#">&raquo;</a>
+                     </li>
+                  }
+               </ul>
+            </div>
+         </div>
+            <!-- /.row -->
+      }
+
+      <hr>
+
+      @footer()
+
+   </div>
+      <!-- /.container -->
+}
+
+

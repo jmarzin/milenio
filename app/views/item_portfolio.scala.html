@@ -1,0 +1,66 @@
+@(titre: String, type_port: String, carousel: Seq[(String, Html, String)], description: Html, items_lies: Seq[String])(implicit req: RequestHeader)
+
+@main(None) {
+
+   <!-- Page Content -->
+   <div class="container">
+         <!-- Page Heading/Breadcrumbs -->
+      <div class="row">
+         <div class="col-lg-12">
+            <h1 class="page-header">@titre
+               <small></small>
+            </h1>
+            <ol class="breadcrumb">
+               <li><a href="@routes.Application.index">Accueil</a>
+               </li>
+               <li class="active">@titre</li>
+            </ol>
+         </div>
+      </div>
+         <!-- /.row -->
+         <!-- Portfolio Item Row -->
+      <div class="row">
+         <div class="col-md-8">
+            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+            @if(carousel.size > 0) {
+               @carousel_part2(carousel)
+            }
+            </div>
+         </div>
+
+         <div class="col-md-4">
+         @description
+         </div>
+
+      </div>
+         <!-- /.row -->
+
+         <!-- Related Projects Row -->
+      @if(items_lies.size > 0) {
+         <div class="row">
+
+            <div class="col-lg-12">
+               <h3 class="page-header">Items voisins</h3>
+            </div>
+
+            @for(i <- items_lies.indices) {
+               <div class="col-sm-3 col-xs-6">
+                  <a href="@routes.Application.item_portefeuille(type_port,items_lies(i).split("/").takeRight(2)(0))">
+                     <img class="img-responsive img-hover img-related"
+                     src="@routes.Assets.at(items_lies(i))"
+                     alt=""
+                     height="500" width="300">
+                  </a>
+               </div>
+            }
+
+         </div>
+      }
+         <!-- /.row -->
+
+      <hr>
+      @footer()
+   </div>
+}
+
+

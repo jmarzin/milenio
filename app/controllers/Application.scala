@@ -12,7 +12,25 @@ object Application extends Controller {
   val chemin_contenu = ""
   val chemin_appli = Play.application.path.toString
 
-  def liste_realisations(place: String) : Seq[(String, String, String, Html)] = {
+  def singulier(titre: String): String = titre match {
+    case "services/realisations" => "Réalisation"
+    case "services/cuisines" => "Cuisine"
+    case "services/salles_de_bain" => "Salle de bain"
+    case "services/rangements" => "Rangement"
+    case "realisations" => "Réalisation"
+    case _ => titre
+  }
+
+  def pluriel(titre: String): String = titre match {
+    case "services/realisations" => "Réalisations"
+    case "services/cuisines" => "Cuisines"
+    case "services/salles_de_bain" => "Salles de bain"
+    case "services/rangements" => "Rangements"
+    case "realisations" => "Réalisations"
+    case _ => titre
+  }
+
+  def liste_items(place: String) : Seq[(String, String, String, Html)] = {
     val place_realisations = s"contenu/$place"
 
     val real_dir = new File(chemin_appli +"/" + place_realisations)
@@ -75,7 +93,7 @@ object Application extends Controller {
     Ok(views.html.index(
       construit_carousel("contenu/accueil/carousel"),
       pan,
-      liste_realisations("realisations").map(_._1).filter(x => {
+      liste_items("realisations").map(_._1).filter(x => {
         val nom = x.split('/').drop(2)(0)
         nom.toUpperCase == nom
       })))
@@ -89,28 +107,23 @@ object Application extends Controller {
       construit_carousel("contenu/a_propos")))
   }
 
-  def services = Action { implicit request =>
-    Ok(views.html.services(
-      "contenu/services/services.jpg",
-      liste_realisations("services").map(x => (x._1,x._2,x._4))
-    ))
-  }
-
-  def portefeuille(num_page: Int) = Action {implicit request =>
-    val liste_real = liste_realisations("realisations")
-    val max_page = (liste_real.size - 1) / 9 + 1
-    Ok(views.html.portefeuille(
+  def portefeuille(type_port: String, num_page: Int) = Action {implicit request =>
+    val liste = liste_items(type_port)
+    val max_page = (liste.size - 1) / 9 + 1
+    Ok(views.html.portfolio(
+      pluriel(type_port),
+      type_port,
       num_page,
       max_page,
-      liste_real.map(x => {
+      liste.map(x => {
         (x._1, x._2, x._3)
       }).slice((num_page - 1) * 9, (num_page - 1) * 9 + 9)
     ))
   }
 
-  def realisation(real: String) = Action { implicit request =>
+  def item_portefeuille(type_port: String, real: String) = Action { implicit request =>
 
-    val fic_desc = new File(chemin_appli + "/contenu/realisations/" + real + "/description.html")
+    val fic_desc = new File(chemin_appli + s"/contenu/$type_port/" + real + "/description.html")
     val description = {
       if (fic_desc.exists)
         Html(Source.fromFile(fic_desc).mkString)
@@ -118,7 +131,7 @@ object Application extends Controller {
         Html("<h2>Description manquante</h2>")
     }
 
-    val fic_liees = new File(chemin_appli + "/contenu/realisations/" + real + "/realisations_liees.txt")
+    val fic_liees = new File(chemin_appli + s"/contenu/$type_port/" + real + "/realisations_liees.txt")
     val filtre_real = {
       if (fic_liees.exists)
         ".*" + Source.fromFile(fic_liees).getLines.mkString(".*|.*") +".*"
@@ -126,9 +139,11 @@ object Application extends Controller {
         "aucune"
     }
 
-    Ok(views.html.realisation(
-      construit_carousel("contenu/realisations/" + real),
+    Ok(views.html.item_portfolio(
+      singulier(type_port),
+      type_port,
+      construit_carousel(s"contenu/$type_port/" + real),
       description,
-      liste_realisations("realisations").map(_._1).filter(_.matches(filtre_real))))
+      liste_items(type_port).map(_._1).filter(_.matches(filtre_real))))
   }
 }

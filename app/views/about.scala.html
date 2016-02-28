@@ -2,7 +2,47 @@
 
 @main(Some("about")) {
 
-   @about_body(a_propos,carousel)
+   <div class="container">
+
+         <!-- Page Heading/Breadcrumbs -->
+      <div class="row">
+         <div class="col-lg-12">
+            <h1 class="page-header">Actualités
+               <small></small>
+            </h1>
+            <ol class="breadcrumb">
+               <li><a href="@routes.Application.index">Accueil</a>
+               </li>
+               <li class="active">Actualités</li>
+            </ol>
+         </div>
+      </div>
+         <!-- /.row -->
+
+         <!-- Carousel -->
+      <div class="row">
+         <div class="col-md-4">
+            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+            @if(carousel.size > 0) {
+               @carousel_part2(carousel)
+            }
+            </div>
+         </div>
+
+            <!-- Intro Content -->
+         <div class="col-md-8">
+
+         @a_propos
+         </div>
+      </div>
+         <!-- /.row -->
+
+      <hr>
+
+      @footer()
+
+   </div>
+      <!-- /.container -->
 
 }
 

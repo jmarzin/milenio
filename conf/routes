@@ -5,10 +5,15 @@
 # Home page
 GET     /                           controllers.Application.index
 GET     /about                      controllers.Application.about
-GET     /services                   controllers.Application.services
 GET     /contact/:focus_message     controllers.Contact.edit(focus_message: Boolean )
-GET     /portefeuille/:num_page     controllers.Application.portefeuille(num_page: Int)
-GET     /realisation/:real          controllers.Application.realisation(real)
+GET     /realisations/:num_page     controllers.Application.portefeuille(type_port: String ?= "realisations",num_page: Int)
+GET     /realisation/:real          controllers.Application.item_portefeuille(type_port: String ?= "realisations", real: String)
+GET     /cuisines/:num_page         controllers.Application.portefeuille(type_port: String ?= "services/cuisines", num_page: Int)
+GET     /cuisine/:cuis              controllers.Application.item_portefeuille(type_port: String ?= "services/cuisines", cuis: String)
+GET     /salles_de_bain/:num_page   controllers.Application.portefeuille(type_port: String ?= "services/salles_de_bain", num_page: Int)
+GET     /salle_de_bain/:sdb        controllers.Application.item_portefeuille(type_port: String ?= "services/salles_de_bain", sdb: String)
+GET     /rangements/:num_page       controllers.Application.portefeuille(type_port: String ?= "services/rangements", num_page: Int)
+GET     /rangement/:rangmt         controllers.Application.item_portefeuille(type_port: String ?= "services/rangements", rangmt: String)
 POST    /contact/message            controllers.Contact.message
 
 # Map static resources from the /public folder to the /assets URL path
