@@ -1,7 +1,7 @@
 @(carousel: Seq[(String, Html, String)], panneaux: Seq[(Object, String)], realisations: Seq[String])
 
 <!-- Header Carousel -->
-@if(carousel.size > 0) {
+@if(carousel nonEmpty) {
     <header id="myCarousel" class="carousel slide">
         @carousel_part(carousel)
     </header>

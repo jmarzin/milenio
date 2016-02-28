@@ -65,7 +65,7 @@ object Contact extends Controller {
       if (futureResponse.isCompleted) {
         val reponse: Seq[JsValue] = futureResponse.value.get.get
         val liste_occupe = reponse.map(_.as[Array[Map[String, String]]])
-        tableau_occupe = liste_occupe(0).map(x => new Interval(new DateTime(x("start")), new DateTime(x("end"))))
+        tableau_occupe = liste_occupe.head.map(x => new Interval(new DateTime(x("start")), new DateTime(x("end"))))
       } else {
         tableau_occupe = Array(new Interval(debut, fin))}
       tableau_occupe +:= new Interval(debut, debut)

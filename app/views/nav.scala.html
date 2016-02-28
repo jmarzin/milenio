@@ -17,28 +17,28 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
                 <li
-                    @if(option_menu == Some("about")) {
+                    @if(option_menu contains "about") {
                         class="active"
                     }
                     >
                     <a href="@routes.Application.about">Actualités</a>
                 </li>
                 <li
-                    @if(option_menu == Some("services")) {
+                    @if(option_menu contains "services") {
                         class="active"
                     }
                     >
                     <a href="@routes.Application.services">Services</a>
                 </li>
                 <li
-                    @if(option_menu == Some("contact")) {
+                    @if(option_menu contains "contact") {
                         class="active"
                     }
                     >
                     <a href="@routes.Contact.edit(false)">Contact</a>
                 </li>
                 <li
-                    @if(option_menu == Some("réalisations")) {
+                    @if(option_menu contains "réalisations") {
                         class="active"
                         }
                 >

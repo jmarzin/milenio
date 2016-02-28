@@ -84,7 +84,9 @@ object Application extends Controller {
   def about = Action { implicit request =>
     val fic_a_propos = new File(s"$chemin_appli/contenu/a_propos/a_propos.html")
     val a_propos = if (fic_a_propos.exists) Html(Source.fromFile(fic_a_propos).mkString) else Html("")
-    Ok(views.html.about(a_propos))
+    Ok(views.html.about(
+      a_propos,
+      construit_carousel("contenu/a_propos")))
   }
 
   def services = Action { implicit request =>
@@ -100,7 +102,9 @@ object Application extends Controller {
     Ok(views.html.portefeuille(
       num_page,
       max_page,
-      liste_real.map(x => {(x._1, x._2, x._3)}).drop((num_page - 1) * 9).take(9)
+      liste_real.map(x => {
+        (x._1, x._2, x._3)
+      }).slice((num_page - 1) * 9, (num_page - 1) * 9 + 9)
     ))
   }
 

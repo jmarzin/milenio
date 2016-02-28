@@ -1,4 +1,4 @@
-@(a_propos: Html)
+@(a_propos: Html, carousel: Seq[(String, Html, String)])
 
 <!-- Page Content -->
 <div class="container">
@@ -18,9 +18,19 @@
     </div>
     <!-- /.row -->
 
-    <!-- Intro Content -->
+    <!-- Carousel -->
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-4">
+            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+            @if(carousel.size > 0) {
+                @carousel_part2(carousel)
+            }
+            </div>
+        </div>
+
+    <!-- Intro Content -->
+        <div class="col-md-8">
+
             @a_propos
         </div>
     </div>

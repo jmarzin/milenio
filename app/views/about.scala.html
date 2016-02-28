@@ -1,8 +1,8 @@
-@(a_propos: Html)(implicit req: RequestHeader)
+@(a_propos: Html, carousel: Seq[(String, Html, String)])(implicit req: RequestHeader)
 
 @main(Some("about")) {
 
-   @about_body(a_propos)
+   @about_body(a_propos,carousel)
 
 }
 
