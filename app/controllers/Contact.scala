@@ -52,6 +52,7 @@ object Contact extends Controller {
       val maintenant = DateTime now
       val debut = maintenant plusHours 2  withMinute 0 withSecond 0 withMillisOfSecond 0
       val fin = debut plusMonths(2)
+      //https://calendar.google.com/calendar?cid=OXVhN3UxbXRjZW5wN2hhNjY1ZTdrcGt0bW9AZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ
       val json_request: JsValue = Json parse(
         "{\"items\": [{\"id\": \"9ua7u1mtcenp7ha665e7kpktmo@group.calendar.google.com\"}],\"timeMin\": \""
           + debut +
@@ -79,7 +80,7 @@ object Contact extends Controller {
           tableau_libre :+= tableau_occupe(i).gap(tableau_occupe(i + 1))
         }
       }
-     tableau_libre
+      tableau_libre
     }
   }
 
